@@ -5,7 +5,8 @@ import java.awt.Graphics2D;
 public class Cat extends Entity {
 	
 	static final float GRAVITY = .45f;
-	static final float JUMP_STRENGTH = -9f;
+	static final float JUMP_STRENGTH = -12f;
+	static final int GROUND = 500;
 	
 	boolean collidingWithObject;
 	int jumpsSinceLanding;
@@ -66,8 +67,8 @@ public class Cat extends Entity {
 		y += yv;
 		x += xv;
 		
-		if(y > 400){
-			y = 400;
+		if(y > GROUND - ys){
+			y = GROUND - ys;
 			sittin = true;
 		}
 	}

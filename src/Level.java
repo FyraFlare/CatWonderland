@@ -14,6 +14,7 @@ public class Level {
 	ArrayList<Obstacle> obstacles;
 	ArrayList<Stuff> stuffs;
 	ArrayList<Grabbies> grabbies;
+	Background background;
 	
 	float scrollSpeed;
 	
@@ -25,6 +26,8 @@ public class Level {
 		obstacles = new ArrayList<Obstacle>();
 		stuffs = new ArrayList<Stuff>();
 		grabbies = new ArrayList<Grabbies>();
+		
+		background = new Background("TestBG.png");
 		
 		currLevel = this;
 	}
@@ -57,9 +60,14 @@ public class Level {
 			grabby.x += scrollSpeed;
 			grabby.update();
 		}
+		
+		background.x += scrollSpeed;
+		background.update();
 	}
 	
 	public void draw(Graphics2D g){
+		
+		background.draw(g);
 		
 		for(Obstacle o : obstacles){
 			o.draw(g);
