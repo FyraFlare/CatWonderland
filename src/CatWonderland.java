@@ -1,4 +1,5 @@
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -6,6 +7,7 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 public class CatWonderland implements Runnable {
 
@@ -15,7 +17,8 @@ public class CatWonderland implements Runnable {
 	JFrame frame;
 	Canvas canvas;
 	BufferStrategy bufferStrategy;
-
+	Director director;
+	
 	public CatWonderland() {
 		frame = new JFrame("Basic Game");
 
@@ -30,6 +33,7 @@ public class CatWonderland implements Runnable {
 		panel.add(canvas);
 
 		canvas.addMouseListener(new MouseControl());
+		canvas.addKeyListener(Input.getInstance());
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
@@ -40,6 +44,8 @@ public class CatWonderland implements Runnable {
 		bufferStrategy = canvas.getBufferStrategy();
 
 		canvas.requestFocus();
+		
+		director = new Director();
 	}
 
 	private class MouseControl extends MouseAdapter {
@@ -98,24 +104,19 @@ public class CatWonderland implements Runnable {
 
 	private void render() {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-		g.clearRect(0, 0, WIDTH, HEIGHT);
+		g.setColor(Color.white);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
 		draw(g);
 		g.dispose();
 		bufferStrategy.show();
 	}
 
-	// TESTING
-	private double x = 0;
-
 	protected void update() {		
-		x += 3;
-		while (x > 500) {
-			x -= 500;
-		}
+		director.update();
 	}
 
 	protected void draw(Graphics2D g) {
-		g.fillRect((int) x, 0, 200, 200);
+		director.draw(g);
 	}
 
 	public static void main(String[] args) {
