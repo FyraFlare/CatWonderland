@@ -10,7 +10,7 @@ public class Obstacle extends Entity {
 		x = (float) (400 + Math.random() * 1800);
 		y = (float) (Math.random() * 300f + 100);
 		ys = 30;
-		xs = 280;
+		xs = 30;
 		
 		currColor = Color.red;
 	}
