@@ -23,7 +23,7 @@ public class CatWonderland implements Runnable {
 	Director director;
 	
 	public CatWonderland() {
-		frame = new JFrame("Basic Game");
+		frame = new JFrame("Cat Wonderland");
 
 		JPanel panel = (JPanel) frame.getContentPane();
 		panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -49,6 +49,8 @@ public class CatWonderland implements Runnable {
 		canvas.requestFocus();
 		
 		director = new Director();
+		
+		Resources.getInstance();
 	}
 
 	private class MouseControl extends MouseAdapter {
@@ -62,11 +64,11 @@ public class CatWonderland implements Runnable {
 
 	public void run() {
 
-		long beginLoopTime;
-		long endLoopTime;
+//		long beginLoopTime;
+//		long endLoopTime;
 //		long currentUpdateTime = System.nanoTime();
 //		long lastUpdateTime;
-		long deltaLoop;
+//		long deltaLoop;
 //
 //		while (running) {
 //			beginLoopTime = System.nanoTime();
@@ -91,38 +93,38 @@ public class CatWonderland implements Runnable {
 //			}
 //		}
 //		
-		long sleepTime;
-
-		while (running) {
-			
-			beginLoopTime = System.nanoTime();
-			
-			update();
-			render();
-
-			endLoopTime = System.nanoTime();
-
-			deltaLoop = (endLoopTime - beginLoopTime) / (1000*1000);
-			sleepTime = 1000/desiredFPS - deltaLoop;
-			sleepTime = Math.max(sleepTime, 0);
-//			System.out.println(sleepTime);
-			
-			try {
-				Thread.sleep(sleepTime);
-			} catch (InterruptedException e) {
-				
-			}
-		}
+//		long sleepTime;
+//
+//		while (running) {
+//			
+//			beginLoopTime = System.nanoTime();
+//			
+//			update();
+//			render();
+//
+//			endLoopTime = System.nanoTime();
+//
+//			deltaLoop = (endLoopTime - beginLoopTime) / (1000*1000);
+//			sleepTime = 1000/desiredFPS - deltaLoop;
+//			sleepTime = Math.max(sleepTime, 0);
+////			System.out.println(sleepTime);
+//			
+//			try {
+//				Thread.sleep(sleepTime);
+//			} catch (InterruptedException e) {
+//				
+//			}
+//		}
 		
 //		runGameLoop();
 		
-//		Timer timer = new Timer(1000/60, new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				update();
-//				render();
-//			}
-//		});
-//		timer.start();
+		Timer timer = new Timer(1000/60, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				update();
+				render();
+			}
+		});
+		timer.start();
 	}
 
 //	private int fps = 60;
