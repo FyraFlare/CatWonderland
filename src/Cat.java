@@ -37,6 +37,10 @@ public class Cat extends Entity {
 		yv = 0;
 	}
 	
+	public void boost(){
+		x += 20;
+	}
+	
 	public void update(){
 		if(collidingWithObject){
 			xv = Level.getCurrLevel().scrollSpeed;
